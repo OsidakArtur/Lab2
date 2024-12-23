@@ -1,0 +1,105 @@
+﻿using System;
+
+
+
+class Program
+
+{
+
+    static void Main()
+
+    {
+
+        double a = GetCoefficient("a");
+
+        double b = GetCoefficient("b");
+
+        double c = GetCoefficient("c");
+
+
+
+        double discriminant = CalculateDiscriminant(a, b, c);
+
+        Console.WriteLine($"Дискримінант: {discriminant:F3}");
+
+
+
+        SolveEquation(a, b, discriminant);
+
+    }
+
+
+
+    static double GetCoefficient(string name)
+
+    {
+
+        while (true)
+
+        {
+
+            Console.Write($"Введіть коефіцієнт {name}: ");
+
+            if (double.TryParse(Console.ReadLine(), out double value))
+
+                return value;
+
+
+
+            Console.WriteLine($"Помилка: некоректне значення для {name}. Спробуйте ще раз.");
+
+        }
+
+    }
+
+
+
+    static double CalculateDiscriminant(double a, double b, double c)
+
+    {
+
+        return b * b - 4 * a * c;
+
+    }
+
+
+
+    static void SolveEquation(double a, double b, double discriminant)
+
+    {
+
+        if (discriminant > 0)
+
+        {
+
+            double sqrtD = Math.Sqrt(discriminant);
+
+            double x1 = (-b + sqrtD) / (2 * a);
+
+            double x2 = (-b - sqrtD) / (2 * a);
+
+            Console.WriteLine($"Корені рівняння: x1 = {x1:F3}, x2 = {x2:F3}");
+
+        }
+
+        else if (discriminant == 0)
+
+        {
+
+            double x = -b / (2 * a);
+
+            Console.WriteLine($"Єдиний корінь рівняння: x = {x:F3}");
+
+        }
+
+        else
+
+        {
+
+            Console.WriteLine("Коренів немає (дискримінант від'ємний).");
+
+        }
+
+    }
+
+}
